@@ -16,7 +16,38 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private CheckBox dog,cat,cow;
-    private Button check;
+    private Button check,clear;
+    ImageView image1,image2,image3;
+
+    public void onClearButtonClick()
+    {
+        dog = (CheckBox)findViewById(R.id.checkDog);
+        cat = (CheckBox)findViewById(R.id.checkCat);
+        cow = (CheckBox)findViewById(R.id.checkCow);
+
+        image1 = (ImageView) findViewById(R.id.imageView1);
+        image2 = (ImageView) findViewById(R.id.imageView2);
+        image3 = (ImageView) findViewById(R.id.imageView3);
+
+        clear = (Button)findViewById(R.id.clearButton);
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dog.setChecked(false);
+                cat.setChecked(false);
+                cow.setChecked(false);
+
+                image1.setImageResource(android.R.color.transparent);
+                image2.setImageResource(android.R.color.transparent);
+                image3.setImageResource(android.R.color.transparent);
+            }
+        });
+
+
+
+
+    }
 
     public void onCheckButtonClick()
     {
@@ -37,23 +68,23 @@ public class MainActivity extends AppCompatActivity {
 
                 //Toast.makeText(MainActivity.this,msg.toString(),Toast.LENGTH_LONG).show();
 
-                ImageView image1 = (ImageView) findViewById(R.id.imageView1);
-                ImageView image2 = (ImageView) findViewById(R.id.imageView2);
-                ImageView image3 = (ImageView) findViewById(R.id.imageView3);
+                image1 = (ImageView) findViewById(R.id.imageView1);
+                image2 = (ImageView) findViewById(R.id.imageView2);
+                image3 = (ImageView) findViewById(R.id.imageView3);
 
                 if(cat.isChecked() && !dog.isChecked() && !cow.isChecked())
                 {
                     image2.setImageResource(R.drawable.cat);
                     image1.setImageResource(android.R.color.transparent);
                     image3.setImageResource(android.R.color.transparent);
-                    Toast.makeText(MainActivity.this,"Cat checked",Toast.LENGTH_LONG).show();
+
                 }
                 else if(dog.isChecked() && !cat.isChecked() && !cow.isChecked())
                 {
                     image2.setImageResource(R.drawable.dog);
                     image1.setImageResource(android.R.color.transparent);
                     image3.setImageResource(android.R.color.transparent);
-                    Toast.makeText(MainActivity.this,"Dog checked",Toast.LENGTH_LONG).show();
+
                 }
 
                 else if(cow.isChecked() && !dog.isChecked() && !cat.isChecked())
@@ -61,13 +92,33 @@ public class MainActivity extends AppCompatActivity {
                     image2.setImageResource(R.drawable.cow);
                     image1.setImageResource(android.R.color.transparent);
                     image3.setImageResource(android.R.color.transparent);
-                    Toast.makeText(MainActivity.this,"Cow checked",Toast.LENGTH_LONG).show();
+
                 }
 
                 else if(!dog.isChecked() && !cat.isChecked() && !cow.isChecked())
                 {
                     image1.setImageResource(android.R.color.transparent);
                     image2.setImageResource(android.R.color.transparent);
+                    image3.setImageResource(android.R.color.transparent);
+                }
+
+                else if(dog.isChecked() && cat.isChecked() && !cow.isChecked())
+                {
+                    image1.setImageResource(R.drawable.dog);
+                    image2.setImageResource(R.drawable.cat);
+                    image3.setImageResource(android.R.color.transparent);
+                }
+                else if(dog.isChecked() && !cat.isChecked() && cow.isChecked())
+                {
+                    image1.setImageResource(R.drawable.dog);
+                    image2.setImageResource(R.drawable.cow);
+                    image3.setImageResource(android.R.color.transparent);
+                }
+
+                else if(!dog.isChecked() && cat.isChecked() && cow.isChecked())
+                {
+                    image1.setImageResource(R.drawable.cat);
+                    image2.setImageResource(R.drawable.cow);
                     image3.setImageResource(android.R.color.transparent);
                 }
 
@@ -101,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         onCheckButtonClick();
+        onClearButtonClick();
     }
 
     @Override
